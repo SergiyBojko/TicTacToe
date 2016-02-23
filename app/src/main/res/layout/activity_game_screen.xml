@@ -1,0 +1,186 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:padding="0dp"
+    tools:context="com.amegars.tictactoe.GameScreen"
+    android:background="@color/colorPrimaryDark">
+
+    <LinearLayout
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/scoreLayout">
+
+        <LinearLayout
+            android:orientation="horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Player 1: "
+                android:id="@+id/player1Name"
+                android:textSize="25sp" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="0"
+                android:id="@+id/player1Score"
+                android:layout_weight="1"
+                android:textSize="25sp" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Player 2: "
+                android:id="@+id/player2Name"
+                android:gravity="right"
+                android:layout_weight="1"
+                android:textSize="25sp" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="0"
+                android:id="@+id/player2Score"
+                android:textSize="25sp" />
+        </LinearLayout>
+
+       
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_centerVertical="true"
+        android:layout_alignParentStart="true">
+
+        <LinearLayout
+            android:orientation="horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_weight="1">
+
+            <com.amegars.tictactoe.GameFieldCell
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/imageButton00"
+                android:layout_alignLeft="@id/scoreLayout"
+                android:layout_below="@id/scoreLayout"
+
+                android:layout_weight="1"
+                android:background="@color/colorPrimary"
+                android:layout_margin="1sp" />
+
+            <com.amegars.tictactoe.GameFieldCell
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/imageButton01"
+                android:layout_alignLeft="@id/imageButton00"
+                android:layout_below="@id/imageButton00"
+                android:layout_weight="1"
+                android:background="@color/colorPrimary"
+                android:layout_margin="1sp" />
+
+            <com.amegars.tictactoe.GameFieldCell
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/imageButton02"
+                android:layout_alignLeft="@id/imageButton01"
+                android:layout_below="@id/imageButton01"
+                android:layout_weight="1"
+                android:background="@color/colorPrimary"
+                android:layout_margin="1sp" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:orientation="horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_weight="1">
+
+            <com.amegars.tictactoe.GameFieldCell
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/imageButton10"
+                android:layout_toRightOf="@id/imageButton00"
+                android:layout_below="@id/scoreLayout"
+                android:layout_weight="1"
+                android:background="@color/colorPrimary"
+                android:layout_margin="1sp" />
+
+            <com.amegars.tictactoe.GameFieldCell
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/imageButton11"
+                android:layout_toRightOf="@id/imageButton00"
+                android:layout_below="@id/imageButton10"
+                android:layout_weight="1"
+                android:background="@color/colorPrimary"
+                android:layout_margin="1sp" />
+
+            <com.amegars.tictactoe.GameFieldCell
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/imageButton12"
+                android:layout_toRightOf="@id/imageButton00"
+                android:layout_below="@id/imageButton11"
+                android:layout_weight="1"
+                android:background="@color/colorPrimary"
+                android:layout_margin="1sp" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:orientation="horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_weight="1">
+
+            <com.amegars.tictactoe.GameFieldCell
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/imageButton20"
+                android:layout_toRightOf="@id/imageButton10"
+                android:layout_below="@id/scoreLayout"
+                android:layout_weight="1"
+                android:background="@color/colorPrimary"
+                android:layout_margin="1sp" />
+
+            <com.amegars.tictactoe.GameFieldCell
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/imageButton21"
+                android:layout_toRightOf="@id/imageButton10"
+                android:layout_below="@id/imageButton20"
+                android:layout_weight="1"
+                android:background="@color/colorPrimary"
+                android:layout_margin="1sp" />
+
+            <com.amegars.tictactoe.GameFieldCell
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/imageButton22"
+                android:layout_toRightOf="@id/imageButton10"
+                android:layout_below="@id/imageButton21"
+                android:layout_weight="1"
+                android:background="@color/colorPrimary"
+                android:layout_margin="1sp" />
+        </LinearLayout>
+    </LinearLayout>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Player 1 turn"
+        android:id="@+id/currentPlayer"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true"
+        android:textSize="40sp" />
+
+</RelativeLayout>
