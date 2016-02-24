@@ -7,6 +7,7 @@
     android:paddingLeft="@dimen/activity_horizontal_margin"
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/activity_vertical_margin"
+    android:background="@color/colorPrimary"
     tools:context="com.amegars.tictactoe.MainActivity">
 
     <LinearLayout
@@ -20,21 +21,27 @@
             android:layout_height="wrap_content"
             android:text="1 player"
             android:id="@+id/button"
-            android:layout_gravity="center_horizontal" />
+            android:layout_gravity="center_horizontal"
+            android:background="@color/colorPrimaryDark"
+            android:layout_margin="3dp"/>
 
         <Button
             android:layout_width="150dp"
             android:layout_height="wrap_content"
             android:text="2 players"
             android:id="@+id/button2"
-            android:layout_gravity="center_horizontal" />
+            android:layout_gravity="center_horizontal"
+            android:background="@color/colorPrimaryDark"
+            android:layout_margin="3dp"/>
 
         <Button
             android:layout_width="150dp"
             android:layout_height="wrap_content"
             android:text="Sound On"
             android:id="@+id/button3"
-            android:layout_gravity="center_horizontal" />
+            android:layout_gravity="center_horizontal"
+            android:background="@color/colorPrimaryDark"
+            android:layout_margin="3dp"/>
 
     </LinearLayout>
 </RelativeLayout>
