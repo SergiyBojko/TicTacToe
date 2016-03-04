@@ -85,6 +85,8 @@ public class GameScreen extends AppCompatActivity implements View.OnClickListene
 
     }
 
+
+
     @Override
     public void onClick(View v) {
         if(((GameFieldCell)v).getDrawable() == null){
@@ -114,6 +116,7 @@ public class GameScreen extends AppCompatActivity implements View.OnClickListene
                     p2score += 1;
                     ((TextView)findViewById(R.id.player2Score)).setText(p2score.toString());
                     Toast.makeText(this, "Player 2 won!", Toast.LENGTH_SHORT).show();
+
                     resetGameField();
                 }
                 ((TextView)findViewById(R.id.currentPlayer)).setText("Player 1 turn");
@@ -141,6 +144,19 @@ public class GameScreen extends AppCompatActivity implements View.OnClickListene
 
     }
 
+    @Override
+    protected void onRestart (){
+        super.onRestart();
+        clickMP = MediaPlayer.create(GameScreen.this, R.raw.click);
+    }
+
+    @Override
+    protected void onStop (){
+        super.onStop();
+        clickMP.release();
+
+    }
+
     private boolean checkWinConditions(){
 
         if ((c00.getDrawable() != null) && (c00.equals(c01)) && (c00.equals(c02))) return true;
@@ -164,6 +180,7 @@ public class GameScreen extends AppCompatActivity implements View.OnClickListene
     }
 
     private void resetGameField(){
+
         for (GameFieldCell temp: cells){
             temp.resetState();
         }
