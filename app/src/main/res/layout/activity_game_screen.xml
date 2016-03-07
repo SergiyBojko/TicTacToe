@@ -23,6 +23,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Player 1: "
+                android:textColor="@color/darkBlue"
                 android:id="@+id/player1Name"
                 android:textSize="25sp" />
 
@@ -38,6 +39,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Player 2: "
+                android:textColor="@color/darkRed"
                 android:id="@+id/player2Name"
                 android:gravity="right"
                 android:layout_weight="1"

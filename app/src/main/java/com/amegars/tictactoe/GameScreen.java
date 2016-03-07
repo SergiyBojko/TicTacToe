@@ -2,8 +2,10 @@ package com.amegars.tictactoe;
 
 
 import android.media.MediaPlayer;
+import android.os.Handler;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.ImageButton;
 import android.widget.TextView;
@@ -15,6 +17,7 @@ public class GameScreen extends AppCompatActivity implements View.OnClickListene
     private boolean isPlayer1turn;
     private Integer p1score, p2score;
     boolean twoPlayer;
+    boolean gameFinished;
 
     private GameFieldCell c00;
     private GameFieldCell c01;
@@ -42,6 +45,7 @@ public class GameScreen extends AppCompatActivity implements View.OnClickListene
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_game_screen);
         isPlayer1turn = true;
+        gameFinished = false;
         twoPlayer = getIntent().getBooleanExtra("two player", false);
 
         c00 = (GameFieldCell)findViewById(R.id.imageButton00);
@@ -105,7 +109,13 @@ public class GameScreen extends AppCompatActivity implements View.OnClickListene
                     p1score += 1;
                     ((TextView)findViewById(R.id.player1Score)).setText(p1score.toString());
                     Toast.makeText(this, "Player 1 won!", Toast.LENGTH_SHORT).show();
-                    resetGameField();
+                    setGameFieldEnabled(false);
+                    new Handler().postDelayed(new Runnable() {
+                        @Override
+                        public void run() {
+                            resetGameField();
+                        }
+                    }, 1000);
                 }
                 ((TextView)findViewById(R.id.currentPlayer)).setText("Player 2 turn");
 
@@ -116,22 +126,36 @@ public class GameScreen extends AppCompatActivity implements View.OnClickListene
                     p2score += 1;
                     ((TextView)findViewById(R.id.player2Score)).setText(p2score.toString());
                     Toast.makeText(this, "Player 2 won!", Toast.LENGTH_SHORT).show();
+                    setGameFieldEnabled(false);
+                    new Handler().postDelayed(new Runnable() {
+                        @Override
+                        public void run() {
+                            resetGameField();
+                        }
+                    }, 1000);
 
-                    resetGameField();
+
                 }
                 ((TextView)findViewById(R.id.currentPlayer)).setText("Player 1 turn");
 
             }
             isPlayer1turn = !isPlayer1turn;
 
-            if (!twoPlayer){
+
+            if (!twoPlayer && !gameFinished){
                 ai.calculateTurn();
 
                 if (checkWinConditions()){
                     p2score += 1;
                     ((TextView) findViewById(R.id.player2Score)).setText(p2score.toString());
                     Toast.makeText(this, "AI won!", Toast.LENGTH_SHORT).show();
-                    resetGameField();
+                    setGameFieldEnabled(false);
+                    new Handler().postDelayed(new Runnable() {
+                        @Override
+                        public void run() {
+                            resetGameField();
+                        }
+                    }, 1000);
                 }
                 ((TextView)findViewById(R.id.currentPlayer)).setText("Player 1 turn");
 
@@ -142,12 +166,6 @@ public class GameScreen extends AppCompatActivity implements View.OnClickListene
 
 
 
-    }
-
-    @Override
-    protected void onRestart (){
-        super.onRestart();
-        clickMP = MediaPlayer.create(GameScreen.this, R.raw.click);
     }
 
     @Override
@@ -175,7 +193,13 @@ public class GameScreen extends AppCompatActivity implements View.OnClickListene
         }
 
         Toast.makeText(this, "Draw", Toast.LENGTH_SHORT).show();
-        resetGameField();
+        setGameFieldEnabled(false);
+        new Handler().postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                resetGameField();
+            }
+        }, 1000);
         return false;
     }
 
@@ -184,8 +208,37 @@ public class GameScreen extends AppCompatActivity implements View.OnClickListene
         for (GameFieldCell temp: cells){
             temp.resetState();
         }
+        setGameFieldEnabled(true);
+        if (!isPlayer1turn){
+            ai.calculateTurn();
+
+            if (checkWinConditions()){
+                p2score += 1;
+                ((TextView) findViewById(R.id.player2Score)).setText(p2score.toString());
+                Toast.makeText(this, "AI won!", Toast.LENGTH_SHORT).show();
+                setGameFieldEnabled(false);
+                new Handler().postDelayed(new Runnable() {
+                    @Override
+                    public void run() {
+                        resetGameField();
+                    }
+                }, 1000);
+            }
+            ((TextView)findViewById(R.id.currentPlayer)).setText("Player 1 turn");
+
+            isPlayer1turn = !isPlayer1turn;
+        }
 
     }
+
+    private void setGameFieldEnabled(Boolean enabled){
+        for(GameFieldCell c : cells){
+            c.setEnabled(enabled);
+        }
+        gameFinished = !enabled;
+    }
+
+
 
     public class Ai {
 
@@ -210,7 +263,7 @@ public class GameScreen extends AppCompatActivity implements View.OnClickListene
 
 
 
-        public Ai(){
+        private Ai(){
 
             row0.add(c00);
             row0.add(c01);
@@ -247,7 +300,7 @@ public class GameScreen extends AppCompatActivity implements View.OnClickListene
 
         }
 
-        public void calculateTurn (){
+        private void calculateTurn (){
             for (ArrayList<GameFieldCell> line : lines){
 
                 xAmount = 0;
